@@ -533,4 +533,4 @@ vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true 
 vim.cmd("set relativenumber")
 vim.cmd("set nu")
 vim.cmd("set foldmethod=indent")
-vim.cmd.colorscheme "catppuccin-latte"
+vim.cmd.colorscheme "catppuccin-frappe"
