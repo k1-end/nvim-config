@@ -3,7 +3,10 @@ vim.api.nvim_set_keymap('n', '<C-l>', ':noh<CR>', { noremap = true, silent = tru
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+        vim.cmd("autocmd CursorHold  *.php lua vim.lsp.buf.document_highlight()")
+        vim.cmd("autocmd CursorHoldI *.php lua vim.lsp.buf.document_highlight()")
+        vim.cmd("autocmd CursorMoved *.php lua vim.lsp.buf.clear_references()")
     end,
 })
 vim.keymap.set("n", "<leader>nrw", vim.cmd.Ex) -- netrw
