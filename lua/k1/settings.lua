@@ -5,6 +5,7 @@ vim.opt.tabstop = 4 -- tab size
 vim.opt.softtabstop = 4 -- how many tabs to insert when pressing tab
 vim.opt.shiftwidth = 4 -- auto-indentation 
 vim.opt.expandtab = true -- replace tabs with spaces
+vim.o.updatetime = 1000
 
 vim.opt.smartindent = true
 
