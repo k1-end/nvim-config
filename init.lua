@@ -73,6 +73,7 @@ require('lazy').setup({
 
   -- 'navarasu/onedark',
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "dracula/vim", name = "dracula", priority = 1000 },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -150,7 +151,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'catppuccin-latte',
+        theme = 'dracula',
         component_separators = '|',
         section_separators = '',
       },
@@ -199,7 +200,14 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-
+  {
+      'Vonr/align.nvim',
+      branch = "v2",
+      lazy = true,
+      init = function()
+          -- Create your mappings here
+      end
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -533,4 +541,86 @@ vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true 
 vim.cmd("set relativenumber")
 vim.cmd("set nu")
 vim.cmd("set foldmethod=indent")
-vim.cmd.colorscheme "catppuccin-latte"
+vim.cmd.colorscheme "dracula"
+
+-- align plugin keymaps
+local NS = { noremap = true, silent = true }
+
+-- Aligns to 1 character
+vim.keymap.set(
+    'x',
+    '<M-a>',
+    function()
+        require'align'.align_to_char({
+            length = 1,
+        })
+    end,
+    NS
+)
+
+-- Aligns to 2 characters with previews
+vim.keymap.set(
+    'x',
+    'ad',
+    function()
+        require'align'.align_to_char({
+            preview = true,
+            length = 2,
+        })
+    end,
+    NS
+)
+
+-- Aligns to a string with previews
+vim.keymap.set(
+    'x',
+    'aw',
+    function()
+        require'align'.align_to_string({
+            preview = true,
+            regex = false,
+        })
+    end,
+    NS
+)
+
+-- Aligns to a Vim regex with previews
+vim.keymap.set(
+    'x',
+    'ar',
+    function()
+        require'align'.align_to_string({
+            preview = true,
+            regex = true,
+        })
+    end,
+    NS
+)
+
+-- Example gawip to align a paragraph to a string with previews
+vim.keymap.set(
+    'n',
+    'gaw',
+    function()
+        local a = require'align'
+        a.operator(
+            a.align_to_string,
+            {
+                regex = false,
+                preview = true,
+            }
+        )
+    end,
+    NS
+)
+
+-- Example gaaip to align a paragraph to 1 character
+vim.keymap.set(
+    'n',
+    'gaa',
+    function()
+        local a = require'align'
+        a.operator(a.align_to_char)
+    end,
+    NS
+)
