@@ -19,11 +19,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
     vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
-    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts) 
+    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
     vim.cmd("autocmd CursorHold  * lua vim.lsp.buf.document_highlight()")
     vim.cmd("autocmd CursorHoldI * lua vim.lsp.buf.document_highlight()")
     vim.cmd("autocmd CursorMoved * lua vim.lsp.buf.clear_references()")
-    vim.cmd("highlight LspReferenceRead gui=bold guibg=#c0ffee")
+    -- vim.cmd("highlight LspReferenceRead gui=bold guibg=#c0ffee")
   end
 })
 
