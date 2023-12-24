@@ -14,4 +14,5 @@ vim.opt.wrap = false
 vim.cmd("set foldmethod=indent")
 vim.cmd("colorscheme tokyonight")
 vim.cmd("autocmd BufRead * normal 2zr")
+vim.cmd("autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>")
 
