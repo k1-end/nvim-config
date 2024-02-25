@@ -20,13 +20,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
     vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
     vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
+
+    -- The following two autocommands are used to highlight references of the
+    -- word under your cursor when your cursor rests there for a little while.
+    --    See `:help CursorHold` for information about when this is executed
+    --
+    -- When you move your cursor, the highlights will be cleared (the second autocommand).
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client.server_capabilities.documentHighlight then
-        vim.cmd("autocmd CursorHold  * lua vim.lsp.buf.document_highlight()")
-        vim.cmd("autocmd CursorHoldI * lua vim.lsp.buf.document_highlight()")
-        vim.cmd("autocmd CursorMoved * lua vim.lsp.buf.clear_references()")
-        -- vim.cmd("highlight LspReferenceRead gui=bold guibg=#c0ffee")
+    if client and client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = event.buf,
+            callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            buffer = event.buf,
+            callback = vim.lsp.buf.clear_references,
+        })
     end
+
+
+
   end
 })
 
