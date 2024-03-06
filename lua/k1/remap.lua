@@ -11,3 +11,4 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- moving lines
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- moving lines
 vim.keymap.set("n", "J", "mzJ`z") -- joining lines
 vim.keymap.set('n', '<leader>fg', ':G<CR><C-w><C-w>:q<CR>')
+vim.keymap.set('i', '<C-e>', '<C-o>$') -- go to the end of the line in insert mode
