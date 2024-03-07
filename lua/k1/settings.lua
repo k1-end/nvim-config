@@ -16,6 +16,8 @@ vim.cmd("colorscheme tokyonight")
 vim.cmd("autocmd BufRead * normal zr")
 vim.cmd("autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>")
 vim.o.ignorecase = true
+vim.o.wrap = true
+vim.o.linebreak = true
 
 -- vim.cmd("set clipboard=unnamedplus") set clipboard to synct
 
